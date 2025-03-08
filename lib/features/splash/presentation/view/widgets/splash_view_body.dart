@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:user_quiz_app/core/constants/app_asset.dart';
 import 'package:user_quiz_app/core/constants/app_color.dart';
 import 'package:user_quiz_app/core/constants/app_duration.dart';

@@ -11,5 +11,5 @@ abstract class AppAsset {
     'assets/images/quizzing.svg',
     'assets/images/quizzing.svg',
   ];
-  static const String kAppIcon = 'assets/images/back_ground.png';
+  static const String kAppIcon = 'assets/images/icon_app.png';
 }
