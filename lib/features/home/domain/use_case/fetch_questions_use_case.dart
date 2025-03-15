@@ -7,7 +7,7 @@ class FetchQuestionsUseCase {
   final HomeRepo homeRepo;
 
   Future<Either<ServerFailures, Map<String, dynamic>>> execute(
-      {required Map<String, dynamic> lessonsMap}) async {
-    return await homeRepo.fetchQuestions(lessonsMap: lessonsMap);
+      {required Map<String, dynamic> examsMap}) async {
+    return await homeRepo.fetchQuestions(examsMap: examsMap);
   }
 }

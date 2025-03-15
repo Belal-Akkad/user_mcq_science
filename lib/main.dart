@@ -7,7 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:user_quiz_app/core/constants/app_color.dart';
 import 'package:user_quiz_app/core/functions/setup_server_locator.dart';
 
-import 'package:user_quiz_app/features/home/domain/use_case/fetch_lessons_use_case.dart';
+import 'package:user_quiz_app/features/home/domain/use_case/fetch_exams_use_case.dart';
 import 'package:user_quiz_app/features/home/domain/use_case/fetch_questions_use_case.dart';
 import 'package:user_quiz_app/features/home/domain/use_case/fetch_sections_use_case.dart';
 import 'package:user_quiz_app/features/home/domain/use_case/sign_out_use_case.dart';
@@ -45,7 +45,7 @@ class QuizApp extends StatelessWidget {
           create: (context) => FetchAllDataCubit(
             fetchSectionsUseCase: getIt.get<FetchSectionsUseCase>(),
             fetchQuestionsUseCase: getIt.get<FetchQuestionsUseCase>(),
-            fetchlessonsUseCase: getIt.get<FetchLessonsUseCase>(),
+            fetchExamsUseCase: getIt.get<FetchExamsUseCase>(),
           ),
         ),
         BlocProvider(

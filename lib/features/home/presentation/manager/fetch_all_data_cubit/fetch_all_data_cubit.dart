@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_quiz_app/core/errors/server_failures.dart';
 import 'package:user_quiz_app/core/models/section_model.dart';
 import 'package:user_quiz_app/features/home/data/models/all_data_model.dart';
-import 'package:user_quiz_app/features/home/domain/use_case/fetch_lessons_use_case.dart';
+import 'package:user_quiz_app/features/home/domain/use_case/fetch_exams_use_case.dart';
 import 'package:user_quiz_app/features/home/domain/use_case/fetch_questions_use_case.dart';
 import 'package:user_quiz_app/features/home/domain/use_case/fetch_sections_use_case.dart';
 import 'package:user_quiz_app/features/home/presentation/manager/fetch_all_data_cubit/fetch_all_data_state.dart';
@@ -10,12 +10,12 @@ import 'package:user_quiz_app/features/home/presentation/manager/fetch_all_data_
 class FetchAllDataCubit extends Cubit<FetchAllDataState> {
   FetchAllDataCubit({
     required this.fetchSectionsUseCase,
-    required this.fetchlessonsUseCase,
+    required this.fetchExamsUseCase,
     required this.fetchQuestionsUseCase,
   }) : super(FetchAllDataInitialState());
 
   final FetchSectionsUseCase fetchSectionsUseCase;
-  final FetchLessonsUseCase fetchlessonsUseCase;
+  final FetchExamsUseCase fetchExamsUseCase;
   final FetchQuestionsUseCase fetchQuestionsUseCase;
   Map<String, dynamic> questionsMap = {};
   Future<void> fetchAllData() async {
@@ -30,26 +30,26 @@ class FetchAllDataCubit extends Cubit<FetchAllDataState> {
         handlFaileState(faile);
       },
       (sections) async {
-        fetchLessonsData(sections);
+        fetchExamsData(sections);
       },
     );
   }
 
-  Future<void> fetchLessonsData(List<SectionModel> sections) async {
-    var lessions = await fetchlessonsUseCase.execute(sections: sections);
+  Future<void> fetchExamsData(List<SectionModel> sections) async {
+    var lessions = await fetchExamsUseCase.execute(sections: sections);
     lessions.fold(
       (faile) {
         handlFaileState(faile);
       },
-      (lessons) async {
-        fetchQuestionsData(lessons, sections);
+      (exams) async {
+        fetchQuestionsData(exams, sections);
       },
     );
   }
 
   Future<void> fetchQuestionsData(
-      Map<String, dynamic> lessons, List<SectionModel> sections) async {
-    var questions = await fetchQuestionsUseCase.execute(lessonsMap: lessons);
+      Map<String, dynamic> exams, List<SectionModel> sections) async {
+    var questions = await fetchQuestionsUseCase.execute(examsMap: exams);
     questions.fold(
       (faile) {
         handlFaileState(faile);
@@ -60,7 +60,7 @@ class FetchAllDataCubit extends Cubit<FetchAllDataState> {
           FetchAllDataSuccessState(
             allDataModel: AllDataModel(
               questionsMap: questionsMap,
-              lessonsMap: lessons,
+              examsMap: exams,
               sections: sections,
             ),
           ),

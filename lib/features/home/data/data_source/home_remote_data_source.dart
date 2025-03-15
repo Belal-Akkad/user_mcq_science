@@ -1,5 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:user_quiz_app/core/models/lesson_model.dart';
+import 'package:user_quiz_app/core/models/exam_model.dart';
 import 'package:user_quiz_app/core/models/question_model.dart';
 import 'package:user_quiz_app/core/models/section_model.dart';
 
@@ -7,9 +7,8 @@ class HomeRemoteDataSource {
   HomeRemoteDataSource({required this.supabaseClient});
   final SupabaseClient supabaseClient;
   final String sectionsTable = 'sections';
-  final String lessionsTable = 'lessons';
+  final String lessionsTable = 'exams';
   final String questionsTable = 'questions';
-  final String updatesTable = 'updates';
 
   Future<List<SectionModel>> fetchSections() async {
     List<Map<String, dynamic>> data = await supabaseClient
@@ -25,44 +24,44 @@ class HomeRemoteDataSource {
         .from(lessionsTable)
         .select()
         .order('created_at', ascending: true);
-    Map<String, dynamic> lessonsMap = {};
+    Map<String, dynamic> examsMap = {};
 
     sections.map(
       (section) {
-        List<LessonModel> lessonsGroupBySection = response
+        List<ExamModel> examsGroupBySection = response
             .where((lession) => lession['section_id'] == section.id)
-            .map((lession) => LessonModel.fromJson(lession))
+            .map((lession) => ExamModel.fromJson(lession))
             .toList();
-        lessonsMap.addAll(
-          {section.id.toString(): lessonsGroupBySection},
+        examsMap.addAll(
+          {section.id.toString(): examsGroupBySection},
         );
       },
     ).toList();
 
-    return lessonsMap;
+    return examsMap;
   }
 
   Future<Map<String, dynamic>> fetchQuestions(
-      Map<String, dynamic> allLessonsMap) async {
+      Map<String, dynamic> allexamsMap) async {
     List<Map<String, dynamic>> response =
         await supabaseClient.from(questionsTable).select();
     Map<String, dynamic> questionsMap = {};
-    List<LessonModel> lessonsList = [];
+    List<ExamModel> examsList = [];
 
-    allLessonsMap.values.toList().map(
-      (lessons) {
-        lessonsList.addAll(lessons);
+    allexamsMap.values.toList().map(
+      (exam) {
+        examsList.addAll(exam);
       },
     ).toList();
 
-    lessonsList.map(
-      (lesson) {
-        List<QuestionModel> quesstionsGroupByLessons = response
-            .where((question) => question['lesson_id'] == lesson.id)
+    examsList.map(
+      (exams) {
+        List<QuestionModel> quesstionsGroupByExams = response
+            .where((question) => question['exam_id'] == exams.id)
             .map((question) => QuestionModel.fromJson(question))
             .toList();
         questionsMap.addAll(
-          {lesson.id.toString(): quesstionsGroupByLessons},
+          {exams.id.toString(): quesstionsGroupByExams},
         );
       },
     ).toList();

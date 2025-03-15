@@ -9,7 +9,7 @@ import 'package:user_quiz_app/features/auth/domain/use_case/sign_up_use_case.dar
 import 'package:user_quiz_app/features/home/data/data_source/home_remote_data_source.dart';
 import 'package:user_quiz_app/features/home/data/repo_impl/home_repo_impl.dart';
 import 'package:user_quiz_app/features/home/domain/repo/home_repo.dart';
-import 'package:user_quiz_app/features/home/domain/use_case/fetch_lessons_use_case.dart';
+import 'package:user_quiz_app/features/home/domain/use_case/fetch_exams_use_case.dart';
 import 'package:user_quiz_app/features/home/domain/use_case/fetch_questions_use_case.dart';
 import 'package:user_quiz_app/features/home/domain/use_case/fetch_sections_use_case.dart';
 import 'package:user_quiz_app/features/home/domain/use_case/sign_out_use_case.dart';
@@ -28,8 +28,8 @@ void setupServerLocator() {
   getIt.registerSingleton<FetchSectionsUseCase>(
       FetchSectionsUseCase(homeRepo: getIt.get<HomeRepo>()));
 
-  getIt.registerSingleton<FetchLessonsUseCase>(
-      FetchLessonsUseCase(homeRepo: getIt.get<HomeRepo>()));
+  getIt.registerSingleton<FetchExamsUseCase>(
+      FetchExamsUseCase(homeRepo: getIt.get<HomeRepo>()));
 
   getIt.registerSingleton<FetchQuestionsUseCase>(
       FetchQuestionsUseCase(homeRepo: getIt.get<HomeRepo>()));

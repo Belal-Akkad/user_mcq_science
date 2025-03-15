@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:user_quiz_app/core/functions/get_responsive_size.dart';
 import 'package:user_quiz_app/core/widgets/custom_shimmer_text.dart';
-import 'package:user_quiz_app/features/lessons/presentation/views/widgets/custom_lessons_app_bar.dart';
+import 'package:user_quiz_app/features/exams/presentation/views/widgets/custom_exams_app_bar.dart';
 
-class EmptyLessonsViewBody extends StatelessWidget {
-  const EmptyLessonsViewBody({super.key, required this.image});
+class EmptyExamsViewBody extends StatelessWidget {
+  const EmptyExamsViewBody({super.key, required this.image});
   final String image;
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class EmptyLessonsViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomLessonsAppBar(image: image),
+          CustomExamsAppBar(image: image),
           const Spacer(),
           const Center(
             child: CustomShimmerText(text: 'لم يتم إضافة أي إختبار بعد'),

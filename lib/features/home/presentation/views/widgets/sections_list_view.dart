@@ -5,14 +5,14 @@ import 'package:user_quiz_app/core/constants/app_asset.dart';
 import 'package:user_quiz_app/core/functions/get_responsive_size.dart';
 import 'package:user_quiz_app/core/functions/get_screen_width.dart';
 import 'package:user_quiz_app/core/models/section_model.dart';
-import 'package:user_quiz_app/features/lessons/presentation/views/lessons_view.dart';
+import 'package:user_quiz_app/features/exams/presentation/views/exam_view.dart';
 import 'package:user_quiz_app/features/home/presentation/views/widgets/section_item.dart';
 
 class SectionsListView extends StatelessWidget {
   const SectionsListView(
-      {super.key, required this.sections, required this.mapLessons});
+      {super.key, required this.sections, required this.examsMap});
   final List<SectionModel> sections;
-  final Map<String, dynamic> mapLessons;
+  final Map<String, dynamic> examsMap;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -25,7 +25,7 @@ class SectionsListView extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            navigateToLessonsView(index);
+            navigateToExamsView(index);
           },
           child: SectionItem(
             text: sections[index].sectionName,
@@ -37,11 +37,11 @@ class SectionsListView extends StatelessWidget {
     );
   }
 
-  void navigateToLessonsView(int index) {
+  void navigateToExamsView(int index) {
     Get.to(
-      () => LessonsView(
+      () => ExamsView(
         image: AppAsset.kSectionsImages[index],
-        lessions: mapLessons[sections[index].id.toString()],
+        exams: examsMap[sections[index].id.toString()],
       ),
       transition: Transition.fade,
     );

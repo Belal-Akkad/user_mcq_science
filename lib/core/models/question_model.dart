@@ -3,14 +3,14 @@ class QuestionModel {
   final String questionText;
   final List<String> choices;
   final int correctAnswer;
-  final int lessonId;
+  final int examId;
 
   QuestionModel(
       {required this.id,
       required this.questionText,
       required this.choices,
       required this.correctAnswer,
-      required this.lessonId});
+      required this.examId});
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) {
     return QuestionModel(
@@ -20,13 +20,13 @@ class QuestionModel {
             .map((choice) => choice.toString())
             .toList(),
         correctAnswer: json['correct_answer'],
-        lessonId: json['lesson_id']);
+        examId: json['exam_id']);
   }
 
   Map<String, dynamic> toJson() => {
         'questionText': questionText,
         'choices': choices,
         'correctAnswer': correctAnswer,
-        'lessonId': lessonId,
+        'examId': examId,
       };
 }

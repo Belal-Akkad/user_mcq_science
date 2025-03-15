@@ -27,13 +27,13 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<ServerFailures, Map<String, dynamic>>> fetchlessons(
+  Future<Either<ServerFailures, Map<String, dynamic>>> fetchExams(
       {required List<SectionModel> sections}) async {
     try {
-      Map<String, dynamic> lessonsMap =
+      Map<String, dynamic> examsMap =
           await remoteDataSource.fetchlessions(sections: sections);
 
-      return right(lessonsMap);
+      return right(examsMap);
     } on PostgrestException catch (error) {
       return left(ServerPostgrestFailures.fromPostgrestException(error));
     } on SocketException catch (error) {
@@ -45,10 +45,10 @@ class HomeRepoImpl extends HomeRepo {
 
   @override
   Future<Either<ServerFailures, Map<String, dynamic>>> fetchQuestions(
-      {required Map<String, dynamic> lessonsMap}) async {
+      {required Map<String, dynamic> examsMap}) async {
     try {
       Map<String, dynamic> questionsMap =
-          await remoteDataSource.fetchQuestions(lessonsMap);
+          await remoteDataSource.fetchQuestions(examsMap);
 
       return right(questionsMap);
     } on PostgrestException catch (error) {

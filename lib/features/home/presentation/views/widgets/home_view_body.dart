@@ -12,10 +12,10 @@ class HomeViewBody extends StatelessWidget {
   const HomeViewBody({
     super.key,
     required this.sections,
-    required this.lessonsMap,
+    required this.examsMap,
   });
   final List<SectionModel> sections;
-  final Map<String, dynamic> lessonsMap;
+  final Map<String, dynamic> examsMap;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class HomeViewBody extends StatelessWidget {
                 Expanded(
                   child: SectionsListView(
                     sections: sections,
-                    mapLessons: lessonsMap,
+                    examsMap: examsMap,
                   ),
                 )
               ],

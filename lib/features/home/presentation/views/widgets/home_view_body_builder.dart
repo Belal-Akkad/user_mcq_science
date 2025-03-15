@@ -32,7 +32,7 @@ class _HomeViewBodyBuilderState extends State<HomeViewBodyBuilder> {
             if (state is FetchAllDataSuccessState) {
               return HomeViewBody(
                 sections: state.allDataModel.sections,
-                lessonsMap: state.allDataModel.lessonsMap,
+                examsMap: state.allDataModel.examsMap,
               );
             } else if (state is FetchAllDataFailureState) {
               return ErrorView(errMessage: state.errMessage);

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:user_quiz_app/core/models/lesson_model.dart';
+import 'package:user_quiz_app/core/models/exam_model.dart';
 import 'package:user_quiz_app/core/widgets/screen_background_image.dart';
-import 'package:user_quiz_app/features/lessons/presentation/views/widgets/lessons_view_body_builder.dart';
+import 'package:user_quiz_app/features/exams/presentation/views/widgets/exams_view_body_builder.dart';
 
-class LessonsView extends StatelessWidget {
-  const LessonsView({super.key, required this.lessions, required this.image});
-  final List<LessonModel> lessions;
+class ExamsView extends StatelessWidget {
+  const ExamsView({super.key, required this.exams, required this.image});
+  final List<ExamModel> exams;
   final String image;
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,9 @@ class LessonsView extends StatelessWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: ScreenBackgroundImage(
-            screen: LessonsViewBodyBuilder(
+            screen: ExamsViewBodyBuilder(
               image: image,
-              lessions: lessions,
+              exams: exams,
             ),
           ),
         ),
